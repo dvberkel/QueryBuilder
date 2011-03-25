@@ -9,7 +9,7 @@ import org.junit.Test;
 public class QueryBuilderTest
 {
 	@Test
-	public void aQueryBuilderShouldBeAbleToMatchPrecisly()
+	public void aQueryBuilderForExampleShouldBeAbleToMatchNamePrecisly()
 	{
 		QueryBuilder<Example> builder = QueryBuilder.queryFor(Example.class);
 
@@ -17,10 +17,25 @@ public class QueryBuilderTest
 
 		assertEquals("select * from Example where name = 'test';", builder.buildWith(new SqlStrategy()));
 	}
+
+	@Test
+	public void aQueryBuilderForASubclassOfExampleShouldBeAbleToMatchNamePrecisly()
+	{
+		QueryBuilder<SubExample> builder = QueryBuilder.queryFor(SubExample.class);
+
+		builder.name().matches("test");
+
+		assertEquals("select * from SubExample where name = 'test';", builder.buildWith(new SqlStrategy()));
+	}
 }
 
 class Example
 {
 	@SuppressWarnings("unused")
 	private String name;
+}
+
+class SubExample extends Example
+{
+
 }

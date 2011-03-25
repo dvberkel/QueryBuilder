@@ -5,15 +5,16 @@ import org.effrafax.querybuilder.core.strategy.Strategy;
 
 public class QueryBuilder<T>
 {
-
 	public static <T> QueryBuilder<T> queryFor(Class<T> aClass)
 	{
-		return new QueryBuilder<T>();
+		return new QueryBuilder<T>(aClass);
 	}
 
-	private QueryBuilder()
-	{
+	private Class<T> targetClass;
 
+	public QueryBuilder(Class<T> targetClass)
+	{
+		this.targetClass = targetClass;
 	}
 
 	public PropertyCriterium<T> name()
@@ -23,7 +24,7 @@ public class QueryBuilder<T>
 
 	public String buildWith(Strategy strategy)
 	{
-		return "select * from Example where name = 'test';";
+		return String.format("select * from %s where name = 'test';", targetClass.getSimpleName());
 	}
 
 }
