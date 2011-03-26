@@ -21,16 +21,29 @@ public class QueryBuilder<T>
 
 	public PropertyCriterium<T, String> name()
 	{
-		PropertyCriterium<T, String> propertyCriterium = new PropertyCriterium<T, String>("name");
-		this.propertyCriterium = propertyCriterium;
-		return propertyCriterium;
+		return createAndRegisterPropertyCriteriumFor("name");
 	}
 
 	public PropertyCriterium<T, Long> id()
 	{
-		PropertyCriterium<T, Long> propertyCriterium = new PropertyCriterium<T, Long>("id");
-		this.propertyCriterium = propertyCriterium;
+		return createAndRegisterPropertyCriteriumFor("id");
+	}
+
+	private <U> PropertyCriterium<T, U> createAndRegisterPropertyCriteriumFor(String propertyName)
+	{
+		PropertyCriterium<T, U> propertyCriterium = createPropertyCriteriumFor(propertyName);
+		registerPropertyCriterium(propertyCriterium);
 		return propertyCriterium;
+	}
+
+	private <U> PropertyCriterium<T, U> createPropertyCriteriumFor(String propertyName)
+	{
+		return new PropertyCriterium<T, U>(propertyName);
+	}
+
+	private <U> void registerPropertyCriterium(PropertyCriterium<T, U> propertyCriterium)
+	{
+		this.propertyCriterium = propertyCriterium;
 	}
 
 	public String buildWith(Strategy strategy)
