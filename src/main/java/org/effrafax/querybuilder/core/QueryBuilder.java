@@ -5,6 +5,7 @@ import java.util.PriorityQueue;
 
 import org.apache.commons.lang.StringUtils;
 import org.effrafax.querybuilder.core.criteria.PropertyCriterium;
+import org.effrafax.querybuilder.core.criteria.StringPropertyCriterium;
 import org.effrafax.querybuilder.core.strategy.Strategy;
 
 public class QueryBuilder<T>
@@ -27,7 +28,9 @@ public class QueryBuilder<T>
 
 	public PropertyCriterium<T, String> name()
 	{
-		return createAndRegisterPropertyCriteriumFor("name");
+		PropertyCriterium<T, String> propertyCriterium = new StringPropertyCriterium<T>("name");
+		registerPropertyCriterium(propertyCriterium);
+		return propertyCriterium;
 	}
 
 	public PropertyCriterium<T, Long> id()

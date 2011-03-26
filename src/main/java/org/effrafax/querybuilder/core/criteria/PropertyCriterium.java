@@ -21,11 +21,13 @@ public class PropertyCriterium<T, U> implements Comparable<PropertyCriterium<T, 
 	public String toString()
 	{
 		StringBuilder builder = new StringBuilder();
-		builder.append(propertyName).append(" = ");
-		builder.append(matchValue instanceof String ? "'" : "");
-		builder.append(matchValue);
-		builder.append(matchValue instanceof String ? "'" : "");
+		builder.append(propertyName).append(" = ").append(representationOfMatchValue());
 		return builder.toString();
+	}
+
+	protected String representationOfMatchValue()
+	{
+		return matchValue.toString();
 	}
 
 	@Override
