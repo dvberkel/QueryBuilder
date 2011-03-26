@@ -12,19 +12,29 @@ public class QueryBuilder<T>
 
 	private Class<T> targetClass;
 
+	private PropertyCriterium<T, ?> propertyCriterium;
+
 	public QueryBuilder(Class<T> targetClass)
 	{
 		this.targetClass = targetClass;
 	}
 
-	public PropertyCriterium<T> name()
+	public PropertyCriterium<T, String> name()
 	{
-		return new PropertyCriterium<T>();
+		PropertyCriterium<T, String> propertyCriterium = new PropertyCriterium<T, String>("name");
+		this.propertyCriterium = propertyCriterium;
+		return propertyCriterium;
+	}
+
+	public PropertyCriterium<T, Long> id()
+	{
+		PropertyCriterium<T, Long> propertyCriterium = new PropertyCriterium<T, Long>("id");
+		this.propertyCriterium = propertyCriterium;
+		return propertyCriterium;
 	}
 
 	public String buildWith(Strategy strategy)
 	{
-		return String.format("select * from %s where name = 'test';", targetClass.getSimpleName());
+		return String.format("select * from %s where %s;", targetClass.getSimpleName(), propertyCriterium);
 	}
-
 }
