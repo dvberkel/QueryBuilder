@@ -1,6 +1,6 @@
 package org.effrafax.querybuilder.core.criteria;
 
-public class PropertyCriterium<T, U>
+public class PropertyCriterium<T, U> implements Comparable<PropertyCriterium<T, ?>>
 {
 
 	private String propertyName;
@@ -26,5 +26,11 @@ public class PropertyCriterium<T, U>
 		builder.append(matchValue);
 		builder.append(matchValue instanceof String ? "'" : "");
 		return builder.toString();
+	}
+
+	@Override
+	public int compareTo(PropertyCriterium<T, ?> o)
+	{
+		return propertyName.compareTo(o.propertyName);
 	}
 }

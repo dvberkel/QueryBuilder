@@ -38,6 +38,17 @@ public class QueryBuilderTest
 		assertEquals("select * from Example where id = 0;", builder.buildWith(new SqlStrategy()));
 	}
 
+	@Test
+	public void aQueryBuilderForExampleShouldBeAbleToMatchIdAndNamePrecislySimultanously()
+	{
+		QueryBuilder<Example> builder = QueryBuilder.queryFor(Example.class);
+
+		builder.name().matches("test");
+		builder.id().matches(0L);
+
+		assertEquals("select * from Example where id = 0 and name = 'test';", builder.buildWith(new SqlStrategy()));
+	}
+
 }
 
 class Example
