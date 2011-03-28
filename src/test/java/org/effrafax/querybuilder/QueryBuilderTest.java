@@ -19,6 +19,7 @@ public class QueryBuilderTest
 		builder.name().matches("test");
 
 		assertEquals("select * from Example where name = 'test';", builder.buildWith(new SqlStrategy()));
+		assertEquals("building query for Example: name = test", builder.buildWith(new LogStrategy()));
 	}
 
 	@Test
@@ -29,6 +30,7 @@ public class QueryBuilderTest
 		builder.name().matches("test");
 
 		assertEquals("select * from SubExample where name = 'test';", builder.buildWith(new SqlStrategy()));
+		assertEquals("building query for SubExample: name = test", builder.buildWith(new LogStrategy()));
 	}
 
 	@Test

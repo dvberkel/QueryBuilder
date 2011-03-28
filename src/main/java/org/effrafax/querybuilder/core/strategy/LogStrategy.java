@@ -8,7 +8,12 @@ public class LogStrategy implements Strategy
 	@Override
 	public <T> String build(QueryBuilder<T> queryBuilder)
 	{
-		return "building query for Example: name = test";
+		return String.format("building query for %s: name = test", className(queryBuilder));
+	}
+
+	private <T> String className(QueryBuilder<T> queryBuilder)
+	{
+		return queryBuilder.getTargetClass().getSimpleName();
 	}
 
 }
