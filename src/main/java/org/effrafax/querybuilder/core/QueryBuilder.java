@@ -1,6 +1,7 @@
 package org.effrafax.querybuilder.core;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.PriorityQueue;
 
 import org.apache.commons.lang.StringUtils;
@@ -10,7 +11,7 @@ import org.effrafax.querybuilder.core.strategy.Strategy;
 
 public abstract class QueryBuilder<T>
 {
-	private Class<T> targetClass;
+	private final Class<T> targetClass;
 
 	private Collection<PropertyCriterium<T, ?>> propertyCriteria = new PriorityQueue<PropertyCriterium<T, ?>>();
 
@@ -28,7 +29,7 @@ public abstract class QueryBuilder<T>
 	{
 		if (strategy instanceof SqlStrategy)
 		{
-			return String.format("select * from %s where %s;", targetClass.getSimpleName(), createWhereClause());
+			return strategy.build(this);
 		}
 		else
 		{
@@ -39,5 +40,15 @@ public abstract class QueryBuilder<T>
 	public String createWhereClause()
 	{
 		return StringUtils.join(propertyCriteria, " and ");
+	}
+
+	public Class<T> getTargetClass()
+	{
+		return targetClass;
+	}
+
+	public Collection<PropertyCriterium<T, ?>> getPropertyCriteria()
+	{
+		return Collections.unmodifiableCollection(propertyCriteria);
 	}
 }
