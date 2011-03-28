@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 
 import org.effrafax.querybuilder.core.QueryBuilder;
 import org.effrafax.querybuilder.core.strategy.SqlStrategy;
+import org.effrafax.querybuilder.generated.QueryBuilderFactory;
 import org.effrafax.querybuilder.test.Example;
 import org.effrafax.querybuilder.test.SubExample;
 import org.junit.Test;
@@ -13,7 +14,7 @@ public class QueryBuilderTest
 	@Test
 	public void aQueryBuilderForExampleShouldBeAbleToMatchNamePrecisly()
 	{
-		QueryBuilder<Example> builder = QueryBuilder.queryFor(Example.class);
+		QueryBuilder<Example> builder = QueryBuilderFactory.exampleQueryBuilder();
 
 		builder.name().matches("test");
 
@@ -23,7 +24,7 @@ public class QueryBuilderTest
 	@Test
 	public void aQueryBuilderForASubclassOfExampleShouldBeAbleToMatchNamePrecisly()
 	{
-		QueryBuilder<SubExample> builder = QueryBuilder.queryFor(SubExample.class);
+		QueryBuilder<SubExample> builder = QueryBuilderFactory.subExampleQueryBuilder();
 
 		builder.name().matches("test");
 
@@ -33,7 +34,7 @@ public class QueryBuilderTest
 	@Test
 	public void aQueryBuilderForExampleShouldBeAbleToMatchIdPrecisly()
 	{
-		QueryBuilder<Example> builder = QueryBuilder.queryFor(Example.class);
+		QueryBuilder<Example> builder = QueryBuilderFactory.exampleQueryBuilder();
 
 		builder.id().matches(0L);
 
@@ -43,7 +44,7 @@ public class QueryBuilderTest
 	@Test
 	public void aQueryBuilderForExampleShouldBeAbleToMatchIdAndNamePrecislySimultanously()
 	{
-		QueryBuilder<Example> builder = QueryBuilder.queryFor(Example.class);
+		QueryBuilder<Example> builder = QueryBuilderFactory.exampleQueryBuilder();
 
 		builder.name().matches("test");
 		builder.id().matches(0L);
