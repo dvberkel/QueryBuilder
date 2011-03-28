@@ -4,9 +4,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.PriorityQueue;
 
-import org.apache.commons.lang.StringUtils;
 import org.effrafax.querybuilder.core.criteria.PropertyCriterium;
-import org.effrafax.querybuilder.core.strategy.SqlStrategy;
 import org.effrafax.querybuilder.core.strategy.Strategy;
 
 public abstract class QueryBuilder<T>
@@ -27,19 +25,7 @@ public abstract class QueryBuilder<T>
 
 	public String buildWith(Strategy strategy)
 	{
-		if (strategy instanceof SqlStrategy)
-		{
-			return strategy.build(this);
-		}
-		else
-		{
-			return strategy.build(this);
-		}
-	}
-
-	public String createWhereClause()
-	{
-		return StringUtils.join(propertyCriteria, " and ");
+		return strategy.build(this);
 	}
 
 	public Class<T> getTargetClass()
