@@ -11,11 +11,6 @@ import org.effrafax.querybuilder.core.strategy.Strategy;
 
 public class QueryBuilder<T>
 {
-	public static <T> QueryBuilder<T> queryFor(Class<T> aClass)
-	{
-		return new QueryBuilder<T>(aClass);
-	}
-
 	private Class<T> targetClass;
 
 	private Collection<PropertyCriterium<T, ?>> propertyCriteria = new PriorityQueue<PropertyCriterium<T, ?>>();
