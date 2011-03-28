@@ -4,6 +4,8 @@ import static org.junit.Assert.assertEquals;
 
 import org.effrafax.querybuilder.core.QueryBuilder;
 import org.effrafax.querybuilder.core.strategy.SqlStrategy;
+import org.effrafax.querybuilder.test.Example;
+import org.effrafax.querybuilder.test.SubExample;
 import org.junit.Test;
 
 public class QueryBuilderTest
@@ -48,19 +50,5 @@ public class QueryBuilderTest
 
 		assertEquals("select * from Example where id = 0 and name = 'test';", builder.buildWith(new SqlStrategy()));
 	}
-
-}
-
-class Example
-{
-	@SuppressWarnings("unused")
-	private String name;
-
-	@SuppressWarnings("unused")
-	private Long id;
-}
-
-class SubExample extends Example
-{
 
 }
