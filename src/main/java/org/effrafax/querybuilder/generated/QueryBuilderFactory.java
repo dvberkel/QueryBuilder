@@ -1,20 +1,19 @@
 package org.effrafax.querybuilder.generated;
 
-import org.effrafax.querybuilder.core.QueryBuilder;
-import org.effrafax.querybuilder.test.Example;
-import org.effrafax.querybuilder.test.SubExample;
+import org.effrafax.querybuilder.generated.builder.ExampleQueryBuilder;
+import org.effrafax.querybuilder.generated.builder.SubExampleQueryBuilder;
 
 public class QueryBuilderFactory
 {
 
-	public static QueryBuilder<Example> exampleQueryBuilder()
+	public static ExampleQueryBuilder exampleQueryBuilder()
 	{
-		return QueryBuilder.queryFor(Example.class);
+		return new ExampleQueryBuilder();
 	}
 
-	public static QueryBuilder<SubExample> subExampleQueryBuilder()
+	public static SubExampleQueryBuilder subExampleQueryBuilder()
 	{
-		return QueryBuilder.queryFor(SubExample.class);
+		return new SubExampleQueryBuilder();
 	}
 
 }
