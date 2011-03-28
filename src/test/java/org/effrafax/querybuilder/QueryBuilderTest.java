@@ -19,7 +19,7 @@ public class QueryBuilderTest
 		builder.name().matches("test");
 
 		assertEquals("select * from Example where name = 'test';", builder.buildWith(new SqlStrategy()));
-		assertEquals("building query for Example: name = test", builder.buildWith(new LogStrategy()));
+		assertEquals("building query for Example: name = 'test'", builder.buildWith(new LogStrategy()));
 	}
 
 	@Test
@@ -30,7 +30,7 @@ public class QueryBuilderTest
 		builder.name().matches("test");
 
 		assertEquals("select * from SubExample where name = 'test';", builder.buildWith(new SqlStrategy()));
-		assertEquals("building query for SubExample: name = test", builder.buildWith(new LogStrategy()));
+		assertEquals("building query for SubExample: name = 'test'", builder.buildWith(new LogStrategy()));
 	}
 
 	@Test
@@ -41,6 +41,7 @@ public class QueryBuilderTest
 		builder.id().matches(0L);
 
 		assertEquals("select * from Example where id = 0;", builder.buildWith(new SqlStrategy()));
+		assertEquals("building query for Example: id = 0", builder.buildWith(new LogStrategy()));
 	}
 
 	@Test
@@ -52,6 +53,7 @@ public class QueryBuilderTest
 		builder.id().matches(0L);
 
 		assertEquals("select * from Example where id = 0 and name = 'test';", builder.buildWith(new SqlStrategy()));
+		assertEquals("building query for Example: id = 0, name = 'test'", builder.buildWith(new LogStrategy()));
 	}
 
 	@Test
@@ -61,6 +63,6 @@ public class QueryBuilderTest
 
 		builder.name().matches("test");
 
-		assertEquals("building query for Example: name = test", builder.buildWith(new LogStrategy()));
+		assertEquals("building query for Example: name = 'test'", builder.buildWith(new LogStrategy()));
 	}
 }
