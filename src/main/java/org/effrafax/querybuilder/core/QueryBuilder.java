@@ -32,7 +32,7 @@ public abstract class QueryBuilder<T>
 		}
 		else
 		{
-			return "building query for Example: name = test";
+			return strategy.build(this);
 		}
 	}
 
