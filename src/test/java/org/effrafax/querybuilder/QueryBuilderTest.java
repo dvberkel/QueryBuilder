@@ -2,6 +2,7 @@ package org.effrafax.querybuilder;
 
 import static org.junit.Assert.assertEquals;
 
+import org.effrafax.querybuilder.core.strategy.LogStrategy;
 import org.effrafax.querybuilder.core.strategy.SqlStrategy;
 import org.effrafax.querybuilder.generated.QueryBuilderFactory;
 import org.effrafax.querybuilder.generated.builder.ExampleQueryBuilder;
@@ -51,4 +52,13 @@ public class QueryBuilderTest
 		assertEquals("select * from Example where id = 0 and name = 'test';", builder.buildWith(new SqlStrategy()));
 	}
 
+	@Test
+	public void aQueryBuilderForExampleShouldBeAbleToMatchNamePrecislyAndBuildWithALogStrategy()
+	{
+		ExampleQueryBuilder builder = QueryBuilderFactory.exampleQueryBuilder();
+
+		builder.name().matches("test");
+
+		assertEquals("building query for Example: name = test", builder.buildWith(new LogStrategy()));
+	}
 }
