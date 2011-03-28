@@ -18,8 +18,6 @@ public class QueryBuilder<T>
 
 	private Class<T> targetClass;
 
-	private PropertyCriterium<T, ?> propertyCriterium;
-
 	private Collection<PropertyCriterium<T, ?>> propertyCriteria = new PriorityQueue<PropertyCriterium<T, ?>>();
 
 	public QueryBuilder(Class<T> targetClass)
@@ -41,21 +39,8 @@ public class QueryBuilder<T>
 		return propertyCriterium;
 	}
 
-	private <U> PropertyCriterium<T, U> createAndRegisterPropertyCriteriumFor(String propertyName)
-	{
-		PropertyCriterium<T, U> propertyCriterium = createPropertyCriteriumFor(propertyName);
-		registerPropertyCriterium(propertyCriterium);
-		return propertyCriterium;
-	}
-
-	private <U> PropertyCriterium<T, U> createPropertyCriteriumFor(String propertyName)
-	{
-		return new PropertyCriterium<T, U>(propertyName);
-	}
-
 	private <U> void registerPropertyCriterium(PropertyCriterium<T, U> propertyCriterium)
 	{
-		this.propertyCriterium = propertyCriterium;
 		this.propertyCriteria.add(propertyCriterium);
 	}
 
