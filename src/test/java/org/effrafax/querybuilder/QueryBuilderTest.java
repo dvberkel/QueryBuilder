@@ -55,14 +55,4 @@ public class QueryBuilderTest
 		assertEquals("select * from Example where id = 0 and name = 'test';", builder.buildWith(new SqlStrategy()));
 		assertEquals("building query for Example: id = 0, name = 'test'", builder.buildWith(new LogStrategy()));
 	}
-
-	@Test
-	public void aQueryBuilderForExampleShouldBeAbleToMatchNamePrecislyAndBuildWithALogStrategy()
-	{
-		ExampleQueryBuilder builder = QueryBuilderFactory.exampleQueryBuilder();
-
-		builder.name().matches("test");
-
-		assertEquals("building query for Example: name = 'test'", builder.buildWith(new LogStrategy()));
-	}
 }
