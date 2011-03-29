@@ -38,7 +38,7 @@ public class QueryBuilderTest
 	public static Collection<TestBuilder<?>[]> parameters()
 	{
 		List<TestBuilder<?>[]> testBuilders = new ArrayList<TestBuilder<?>[]>();
-		testBuilders.add(new TestBuilder<?>[] { new TestBuilder<ExampleQueryBuilder>(
+		testBuilders.add(new TestBuilder<?>[] { new TestBuilderForExampleQueryBuilder(
 			"select * from Example where name = 'test';", new SqlStrategy())
 		{
 
@@ -51,14 +51,8 @@ public class QueryBuilderTest
 
 				return builder;
 			}
-
-			@Override
-			protected ExampleQueryBuilder builder()
-			{
-				return QueryBuilderFactory.exampleQueryBuilder();
-			}
 		} });
-		testBuilders.add(new TestBuilder<?>[] { new TestBuilder<ExampleQueryBuilder>(
+		testBuilders.add(new TestBuilder<?>[] { new TestBuilderForExampleQueryBuilder(
 			"building query for Example: name = 'test'", new LogStrategy())
 		{
 
@@ -71,14 +65,8 @@ public class QueryBuilderTest
 
 				return builder;
 			}
-
-			@Override
-			protected ExampleQueryBuilder builder()
-			{
-				return QueryBuilderFactory.exampleQueryBuilder();
-			}
 		} });
-		testBuilders.add(new TestBuilder<?>[] { new TestBuilder<SubExampleQueryBuilder>(
+		testBuilders.add(new TestBuilder<?>[] { new TestBuilderForSubExampleQueryBuilder(
 			"select * from SubExample where name = 'test';", new SqlStrategy())
 		{
 
@@ -91,14 +79,8 @@ public class QueryBuilderTest
 
 				return builder;
 			}
-
-			@Override
-			protected SubExampleQueryBuilder builder()
-			{
-				return QueryBuilderFactory.subExampleQueryBuilder();
-			}
 		} });
-		testBuilders.add(new TestBuilder<?>[] { new TestBuilder<SubExampleQueryBuilder>(
+		testBuilders.add(new TestBuilder<?>[] { new TestBuilderForSubExampleQueryBuilder(
 			"building query for SubExample: name = 'test'", new LogStrategy())
 		{
 
@@ -111,14 +93,8 @@ public class QueryBuilderTest
 
 				return builder;
 			}
-
-			@Override
-			protected SubExampleQueryBuilder builder()
-			{
-				return QueryBuilderFactory.subExampleQueryBuilder();
-			}
 		} });
-		testBuilders.add(new TestBuilder<?>[] { new TestBuilder<ExampleQueryBuilder>(
+		testBuilders.add(new TestBuilder<?>[] { new TestBuilderForExampleQueryBuilder(
 			"select * from Example where id = 0;", new SqlStrategy())
 		{
 
@@ -131,14 +107,8 @@ public class QueryBuilderTest
 
 				return builder;
 			}
-
-			@Override
-			protected ExampleQueryBuilder builder()
-			{
-				return QueryBuilderFactory.exampleQueryBuilder();
-			}
 		} });
-		testBuilders.add(new TestBuilder<?>[] { new TestBuilder<ExampleQueryBuilder>(
+		testBuilders.add(new TestBuilder<?>[] { new TestBuilderForExampleQueryBuilder(
 			"building query for Example: id = 0", new LogStrategy())
 		{
 
@@ -151,14 +121,8 @@ public class QueryBuilderTest
 
 				return builder;
 			}
-
-			@Override
-			protected ExampleQueryBuilder builder()
-			{
-				return QueryBuilderFactory.exampleQueryBuilder();
-			}
 		} });
-		testBuilders.add(new TestBuilder<?>[] { new TestBuilder<ExampleQueryBuilder>(
+		testBuilders.add(new TestBuilder<?>[] { new TestBuilderForExampleQueryBuilder(
 			"select * from Example where id = 0 and name = 'test';", new SqlStrategy())
 		{
 
@@ -172,14 +136,8 @@ public class QueryBuilderTest
 
 				return builder;
 			}
-
-			@Override
-			protected ExampleQueryBuilder builder()
-			{
-				return QueryBuilderFactory.exampleQueryBuilder();
-			}
 		} });
-		testBuilders.add(new TestBuilder<?>[] { new TestBuilder<ExampleQueryBuilder>(
+		testBuilders.add(new TestBuilder<?>[] { new TestBuilderForExampleQueryBuilder(
 			"building query for Example: id = 0, name = 'test'", new LogStrategy())
 		{
 
@@ -192,12 +150,6 @@ public class QueryBuilderTest
 				builder.id().matches(0L);
 
 				return builder;
-			}
-
-			@Override
-			protected ExampleQueryBuilder builder()
-			{
-				return QueryBuilderFactory.exampleQueryBuilder();
 			}
 		} });
 
@@ -223,17 +175,32 @@ abstract class TestBuilder<T extends QueryBuilder<?>>
 	public abstract T givenWhen();
 }
 
-abstract class TestBuilderForExample extends TestBuilder<ExampleQueryBuilder>
+abstract class TestBuilderForExampleQueryBuilder extends TestBuilder<ExampleQueryBuilder>
 {
 
-	public TestBuilderForExample(String expectedResult, Strategy strategy)
+	public TestBuilderForExampleQueryBuilder(String expectedResult, Strategy strategy)
 	{
 		super(expectedResult, strategy);
 	}
 
 	@Override
-	protected ExampleQueryBuilder builder()
+	protected final ExampleQueryBuilder builder()
 	{
 		return QueryBuilderFactory.exampleQueryBuilder();
+	}
+}
+
+abstract class TestBuilderForSubExampleQueryBuilder extends TestBuilder<SubExampleQueryBuilder>
+{
+
+	public TestBuilderForSubExampleQueryBuilder(String expectedResult, Strategy strategy)
+	{
+		super(expectedResult, strategy);
+	}
+
+	@Override
+	protected final SubExampleQueryBuilder builder()
+	{
+		return QueryBuilderFactory.subExampleQueryBuilder();
 	}
 }
