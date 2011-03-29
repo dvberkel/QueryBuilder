@@ -45,11 +45,17 @@ public class QueryBuilderTest
 			@Override
 			public ExampleQueryBuilder givenWhen()
 			{
-				ExampleQueryBuilder builder = QueryBuilderFactory.exampleQueryBuilder();
+				ExampleQueryBuilder builder = builder();
 
 				builder.name().matches("test");
 
 				return builder;
+			}
+
+			@Override
+			protected ExampleQueryBuilder builder()
+			{
+				return QueryBuilderFactory.exampleQueryBuilder();
 			}
 		} });
 		testBuilders.add(new TestBuilder<?>[] { new TestBuilder<ExampleQueryBuilder>(
@@ -59,11 +65,17 @@ public class QueryBuilderTest
 			@Override
 			public ExampleQueryBuilder givenWhen()
 			{
-				ExampleQueryBuilder builder = QueryBuilderFactory.exampleQueryBuilder();
+				ExampleQueryBuilder builder = builder();
 
 				builder.name().matches("test");
 
 				return builder;
+			}
+
+			@Override
+			protected ExampleQueryBuilder builder()
+			{
+				return QueryBuilderFactory.exampleQueryBuilder();
 			}
 		} });
 		testBuilders.add(new TestBuilder<?>[] { new TestBuilder<SubExampleQueryBuilder>(
@@ -73,11 +85,17 @@ public class QueryBuilderTest
 			@Override
 			public SubExampleQueryBuilder givenWhen()
 			{
-				SubExampleQueryBuilder builder = QueryBuilderFactory.subExampleQueryBuilder();
+				SubExampleQueryBuilder builder = builder();
 
 				builder.name().matches("test");
 
 				return builder;
+			}
+
+			@Override
+			protected SubExampleQueryBuilder builder()
+			{
+				return QueryBuilderFactory.subExampleQueryBuilder();
 			}
 		} });
 		testBuilders.add(new TestBuilder<?>[] { new TestBuilder<SubExampleQueryBuilder>(
@@ -87,11 +105,17 @@ public class QueryBuilderTest
 			@Override
 			public SubExampleQueryBuilder givenWhen()
 			{
-				SubExampleQueryBuilder builder = QueryBuilderFactory.subExampleQueryBuilder();
+				SubExampleQueryBuilder builder = builder();
 
 				builder.name().matches("test");
 
 				return builder;
+			}
+
+			@Override
+			protected SubExampleQueryBuilder builder()
+			{
+				return QueryBuilderFactory.subExampleQueryBuilder();
 			}
 		} });
 		testBuilders.add(new TestBuilder<?>[] { new TestBuilder<ExampleQueryBuilder>(
@@ -101,11 +125,17 @@ public class QueryBuilderTest
 			@Override
 			public ExampleQueryBuilder givenWhen()
 			{
-				ExampleQueryBuilder builder = QueryBuilderFactory.exampleQueryBuilder();
+				ExampleQueryBuilder builder = builder();
 
 				builder.id().matches(0L);
 
 				return builder;
+			}
+
+			@Override
+			protected ExampleQueryBuilder builder()
+			{
+				return QueryBuilderFactory.exampleQueryBuilder();
 			}
 		} });
 		testBuilders.add(new TestBuilder<?>[] { new TestBuilder<ExampleQueryBuilder>(
@@ -115,11 +145,17 @@ public class QueryBuilderTest
 			@Override
 			public ExampleQueryBuilder givenWhen()
 			{
-				ExampleQueryBuilder builder = QueryBuilderFactory.exampleQueryBuilder();
+				ExampleQueryBuilder builder = builder();
 
 				builder.id().matches(0L);
 
 				return builder;
+			}
+
+			@Override
+			protected ExampleQueryBuilder builder()
+			{
+				return QueryBuilderFactory.exampleQueryBuilder();
 			}
 		} });
 		testBuilders.add(new TestBuilder<?>[] { new TestBuilder<ExampleQueryBuilder>(
@@ -129,12 +165,18 @@ public class QueryBuilderTest
 			@Override
 			public ExampleQueryBuilder givenWhen()
 			{
-				ExampleQueryBuilder builder = QueryBuilderFactory.exampleQueryBuilder();
+				ExampleQueryBuilder builder = builder();
 
 				builder.name().matches("test");
 				builder.id().matches(0L);
 
 				return builder;
+			}
+
+			@Override
+			protected ExampleQueryBuilder builder()
+			{
+				return QueryBuilderFactory.exampleQueryBuilder();
 			}
 		} });
 		testBuilders.add(new TestBuilder<?>[] { new TestBuilder<ExampleQueryBuilder>(
@@ -144,12 +186,18 @@ public class QueryBuilderTest
 			@Override
 			public ExampleQueryBuilder givenWhen()
 			{
-				ExampleQueryBuilder builder = QueryBuilderFactory.exampleQueryBuilder();
+				ExampleQueryBuilder builder = builder();
 
 				builder.name().matches("test");
 				builder.id().matches(0L);
 
 				return builder;
+			}
+
+			@Override
+			protected ExampleQueryBuilder builder()
+			{
+				return QueryBuilderFactory.exampleQueryBuilder();
 			}
 		} });
 
@@ -170,5 +218,22 @@ abstract class TestBuilder<T extends QueryBuilder<?>>
 		this.strategy = strategy;
 	}
 
+	protected abstract T builder();
+
 	public abstract T givenWhen();
+}
+
+abstract class TestBuilderForExample extends TestBuilder<ExampleQueryBuilder>
+{
+
+	public TestBuilderForExample(String expectedResult, Strategy strategy)
+	{
+		super(expectedResult, strategy);
+	}
+
+	@Override
+	protected ExampleQueryBuilder builder()
+	{
+		return QueryBuilderFactory.exampleQueryBuilder();
+	}
 }
