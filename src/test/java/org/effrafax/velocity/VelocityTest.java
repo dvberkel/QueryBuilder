@@ -5,10 +5,13 @@ import static org.junit.Assert.assertEquals;
 import java.io.IOException;
 import java.io.StringWriter;
 import java.io.Writer;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.Velocity;
+import org.apache.velocity.context.Context;
 import org.junit.Test;
 
 public class VelocityTest
@@ -47,6 +50,23 @@ public class VelocityTest
 		VelocityContext context = new VelocityContext();
 		context.put("greeting", "Hello");
 		context.put("greeted", "World");
+
+		Writer writer = new StringWriter();
+		template.merge(context, writer);
+
+		assertEquals("Hello World", writer.toString());
+	}
+
+	@Test
+	public void velocityUsageWithMap()
+	{
+
+		Template template = Velocity.getTemplate(TEMPLATE_DIR + "helloMap.vm");
+		Map<String, String> mapping = new HashMap<String, String>();
+		mapping.put("greeting", "Hello");
+		mapping.put("greeted", "World");
+		Context context = new VelocityContext();
+		context.put("mapping", mapping);
 
 		Writer writer = new StringWriter();
 		template.merge(context, writer);
