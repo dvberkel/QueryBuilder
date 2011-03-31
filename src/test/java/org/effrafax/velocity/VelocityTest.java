@@ -5,7 +5,9 @@ import static org.junit.Assert.assertEquals;
 import java.io.IOException;
 import java.io.StringWriter;
 import java.io.Writer;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.velocity.Template;
@@ -67,6 +69,24 @@ public class VelocityTest
 		mapping.put("greeted", "World");
 		Context context = new VelocityContext();
 		context.put("mapping", mapping);
+
+		Writer writer = new StringWriter();
+		template.merge(context, writer);
+
+		assertEquals("Hello World", writer.toString());
+	}
+
+	@Test
+	public void velocityUsageWithList()
+	{
+
+		Template template = Velocity.getTemplate(TEMPLATE_DIR + "helloList.vm");
+		List<String> words = new ArrayList<String>();
+		words.add("Hello");
+		words.add(" ");
+		words.add("World");
+		Context context = new VelocityContext();
+		context.put("words", words);
 
 		Writer writer = new StringWriter();
 		template.merge(context, writer);

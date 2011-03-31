@@ -1,0 +1,1 @@
+#foreach($word in $words)$word#end
