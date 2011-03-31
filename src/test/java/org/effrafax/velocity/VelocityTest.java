@@ -16,7 +16,7 @@ import org.junit.Test;
 
 public class VelocityTest
 {
-	public static final String TEMPLATE_DIR = "src/test/resources/";
+	public static final String TEMPLATE_DIR = "src/test/resources/templates/";
 
 	@Test
 	public void stringWriterTest() throws IOException
