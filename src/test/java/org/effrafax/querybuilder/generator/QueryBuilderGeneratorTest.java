@@ -26,7 +26,8 @@ public class QueryBuilderGeneratorTest
 
 	private String referenceExampleQueryBuilderCode()
 	{
-		Template template = Velocity.getTemplate("src/test/resources/templates/referenceExampleQueryBuilder.vm");
+		Template template = Velocity
+			.getTemplate("src/test/resources/templates/reference/referenceExampleQueryBuilder.vm");
 		Writer writer = new StringWriter();
 		template.merge(new VelocityContext(), writer);
 		return writer.toString();
