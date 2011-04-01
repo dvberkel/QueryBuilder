@@ -5,6 +5,7 @@ import java.io.Writer;
 import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.Velocity;
+import org.apache.velocity.context.Context;
 
 public class QueryBuilderGenerator
 {
@@ -24,15 +25,8 @@ public class QueryBuilderGenerator
 	public void generate(Writer writer)
 	{
 		Template template = Velocity.getTemplate("src/main/resources/QueryBuilderTemplate.vm");
-
-		Template referenceTemplate = Velocity.getTemplate(referenceQueryBuilderSource());
-		referenceTemplate.merge(new VelocityContext(), writer);
+		Context context = new VelocityContext();
+		context.put("className", generateeClass.getSimpleName());
+		template.merge(context, writer);
 	}
-
-	private String referenceQueryBuilderSource()
-	{
-		return String.format("src/test/resources/templates/reference/reference%sQueryBuilder.vm", generateeClass
-			.getSimpleName());
-	}
-
 }

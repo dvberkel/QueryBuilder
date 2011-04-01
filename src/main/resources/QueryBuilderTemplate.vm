@@ -4,26 +4,26 @@ import org.effrafax.querybuilder.core.QueryBuilder;
 import org.effrafax.querybuilder.core.criteria.LongPropertyCriterium;
 import org.effrafax.querybuilder.core.criteria.PropertyCriterium;
 import org.effrafax.querybuilder.core.criteria.StringPropertyCriterium;
-import org.effrafax.querybuilder.test.Example;
+import org.effrafax.querybuilder.test.${className};
 
-public class ExampleQueryBuilder extends QueryBuilder<Example>
+public class ${className}QueryBuilder extends QueryBuilder<${className}>
 {
 
-	public ExampleQueryBuilder()
+	public ${className}QueryBuilder()
 	{
-		super(Example.class);
+		super(${className}.class);
 	}
 
-	public PropertyCriterium<Example, String> name()
+	public PropertyCriterium<${className}, String> name()
 	{
-		PropertyCriterium<Example, String> propertyCriterium = new StringPropertyCriterium<Example>("name");
+		PropertyCriterium<${className}, String> propertyCriterium = new StringPropertyCriterium<${className}>("name");
 		registerPropertyCriterium(propertyCriterium);
 		return propertyCriterium;
 	}
 
-	public PropertyCriterium<Example, Long> id()
+	public PropertyCriterium<${className}, Long> id()
 	{
-		PropertyCriterium<Example, Long> propertyCriterium = new LongPropertyCriterium<Example>("id");
+		PropertyCriterium<${className}, Long> propertyCriterium = new LongPropertyCriterium<${className}>("id");
 		registerPropertyCriterium(propertyCriterium);
 		return propertyCriterium;
 	}
