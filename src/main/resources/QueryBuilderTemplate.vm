@@ -14,18 +14,13 @@ public class ${className}QueryBuilder extends QueryBuilder<${className}>
 		super(${className}.class);
 	}
 
-	public PropertyCriterium<${className}, String> name()
+#foreach($fieldInfo in $fieldInfos)
+	public PropertyCriterium<${className}, $fieldInfo.type> ${fieldInfo.name}()
 	{
-		PropertyCriterium<${className}, String> propertyCriterium = new StringPropertyCriterium<${className}>("name");
+		PropertyCriterium<${className}, $fieldInfo.type> propertyCriterium = new ${fieldInfo.type}PropertyCriterium<${className}>("$fieldInfo.name");
 		registerPropertyCriterium(propertyCriterium);
 		return propertyCriterium;
 	}
 
-	public PropertyCriterium<${className}, Long> id()
-	{
-		PropertyCriterium<${className}, Long> propertyCriterium = new LongPropertyCriterium<${className}>("id");
-		registerPropertyCriterium(propertyCriterium);
-		return propertyCriterium;
-	}
-
+#end
 }
