@@ -40,4 +40,14 @@ public class ReflectionTest
 
 		assertEquals("name", field.getName());
 	}
+
+	@Test
+	public void aFieldHasAType() throws SecurityException, NoSuchFieldException
+	{
+		Class<?> aClass = Example.class;
+
+		Field field = aClass.getField("name");
+
+		assertEquals(String.class, field.getType());
+	}
 }
