@@ -22,7 +22,7 @@ public class QueryBuilderGeneratorTest
 		Writer writer = new StringWriter();
 		generator.generate(writer);
 
-		assertEquals(referenceExampleQueryBuilderCode(), writer.toString());
+		assertEquals(referenceQueryBuilderCodeFor(Example.class), writer.toString());
 	}
 
 	@Test
@@ -33,22 +33,13 @@ public class QueryBuilderGeneratorTest
 		Writer writer = new StringWriter();
 		generator.generate(writer);
 
-		assertEquals(referenceSubExampleQueryBuilderCode(), writer.toString());
+		assertEquals(referenceQueryBuilderCodeFor(SubExample.class), writer.toString());
 	}
 
-	private String referenceExampleQueryBuilderCode()
+	private String referenceQueryBuilderCodeFor(Class<?> aClass)
 	{
-		Template template = Velocity
-			.getTemplate("src/test/resources/templates/reference/referenceExampleQueryBuilder.vm");
-		Writer writer = new StringWriter();
-		template.merge(new VelocityContext(), writer);
-		return writer.toString();
-	}
-
-	private String referenceSubExampleQueryBuilderCode()
-	{
-		Template template = Velocity
-			.getTemplate("src/test/resources/templates/reference/referenceSubExampleQueryBuilder.vm");
+		Template template = Velocity.getTemplate(String.format(
+			"src/test/resources/templates/reference/reference%sQueryBuilder.vm", aClass.getSimpleName()));
 		Writer writer = new StringWriter();
 		template.merge(new VelocityContext(), writer);
 		return writer.toString();
