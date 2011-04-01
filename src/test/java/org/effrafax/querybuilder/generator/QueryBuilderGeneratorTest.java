@@ -5,6 +5,9 @@ import static org.junit.Assert.assertEquals;
 import java.io.StringWriter;
 import java.io.Writer;
 
+import org.apache.velocity.Template;
+import org.apache.velocity.VelocityContext;
+import org.apache.velocity.app.Velocity;
 import org.effrafax.querybuilder.test.Example;
 import org.junit.Test;
 
@@ -18,6 +21,14 @@ public class QueryBuilderGeneratorTest
 		Writer writer = new StringWriter();
 		generator.generate(writer);
 
-		assertEquals("", writer.toString());
+		assertEquals(referenceExampleQueryBuilderCode(), writer.toString());
+	}
+
+	private String referenceExampleQueryBuilderCode()
+	{
+		Template template = Velocity.getTemplate("src/test/resources/templates/referenceExampleQueryBuilder.vm");
+		Writer writer = new StringWriter();
+		template.merge(new VelocityContext(), writer);
+		return writer.toString();
 	}
 }
