@@ -32,15 +32,19 @@ public class QueryBuilderGenerator
 		Template template = Velocity.getTemplate("src/main/resources/QueryBuilderTemplate.vm");
 		Context context = new VelocityContext();
 		context.put("className", generateeClass.getSimpleName());
+		context.put("fieldInfos", createFieldInfos());
 
+		template.merge(context, writer);
+	}
+
+	private List<Map<String, String>> createFieldInfos()
+	{
 		List<Map<String, String>> fieldInfos = new ArrayList<Map<String, String>>();
 		for (Field field : generateeClass.getFields())
 		{
 			fieldInfos.add(createFieldInfoFor(field));
 		}
-		context.put("fieldInfos", fieldInfos);
-
-		template.merge(context, writer);
+		return fieldInfos;
 	}
 
 	private Map<String, String> createFieldInfoFor(Field field)
