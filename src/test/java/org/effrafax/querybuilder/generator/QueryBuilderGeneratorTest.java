@@ -14,6 +14,8 @@ import org.junit.Test;
 
 public class QueryBuilderGeneratorTest
 {
+	private static final String REFERENCE_TEMPLATE = "src/test/resources/templates/reference/reference%sQueryBuilder.vm";
+
 	@Test
 	public void canGenerateAnExampleQueryBuilder()
 	{
@@ -38,8 +40,7 @@ public class QueryBuilderGeneratorTest
 
 	private String referenceQueryBuilderCodeFor(Class<?> aClass)
 	{
-		Template template = Velocity.getTemplate(String.format(
-			"src/test/resources/templates/reference/reference%sQueryBuilder.vm", aClass.getSimpleName()));
+		Template template = Velocity.getTemplate(String.format(REFERENCE_TEMPLATE, aClass.getSimpleName()));
 		Writer writer = new StringWriter();
 		template.merge(new VelocityContext(), writer);
 		return writer.toString();
