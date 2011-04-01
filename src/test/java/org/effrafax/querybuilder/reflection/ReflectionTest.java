@@ -1,5 +1,6 @@
 package org.effrafax.querybuilder.reflection;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import java.lang.reflect.Field;
@@ -28,5 +29,15 @@ public class ReflectionTest
 		Field[] fields = aClass.getFields();
 
 		assertTrue(2 == fields.length);
+	}
+
+	@Test
+	public void aFieldHasAName() throws SecurityException, NoSuchFieldException
+	{
+		Class<?> aClass = Example.class;
+
+		Field field = aClass.getField("name");
+
+		assertEquals("name", field.getName());
 	}
 }
