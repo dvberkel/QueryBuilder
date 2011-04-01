@@ -5,21 +5,32 @@ import java.io.Writer;
 import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.Velocity;
-import org.effrafax.querybuilder.test.Example;
 
 public class QueryBuilderGenerator
 {
 
-	public static QueryBuilderGenerator generatorFor(Class<Example> aClass)
+	public static QueryBuilderGenerator generatorFor(Class<?> aClass)
 	{
-		return new QueryBuilderGenerator();
+		return new QueryBuilderGenerator(aClass);
+	}
+
+	private Class<?> generateeClass;
+
+	private QueryBuilderGenerator(Class<?> aClass)
+	{
+		this.generateeClass = aClass;
 	}
 
 	public void generate(Writer writer)
 	{
-		Template template = Velocity
-			.getTemplate("src/test/resources/templates/reference/referenceExampleQueryBuilder.vm");
+		Template template = Velocity.getTemplate(referenceQueryBuilderSource());
 		template.merge(new VelocityContext(), writer);
+	}
+
+	private String referenceQueryBuilderSource()
+	{
+		return String.format("src/test/resources/templates/reference/reference%sQueryBuilder.vm", generateeClass
+			.getSimpleName());
 	}
 
 }
