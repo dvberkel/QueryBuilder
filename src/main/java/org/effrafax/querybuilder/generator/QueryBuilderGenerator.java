@@ -36,14 +36,18 @@ public class QueryBuilderGenerator
 		List<Map<String, String>> fieldInfos = new ArrayList<Map<String, String>>();
 		for (Field field : generateeClass.getFields())
 		{
-			Map<String, String> fieldInfo = new HashMap<String, String>();
-			fieldInfo.put("name", field.getName());
-			fieldInfo.put("type", field.getType().getSimpleName());
-
-			fieldInfos.add(fieldInfo);
+			fieldInfos.add(createFieldInfoFor(field));
 		}
 		context.put("fieldInfos", fieldInfos);
 
 		template.merge(context, writer);
+	}
+
+	private Map<String, String> createFieldInfoFor(Field field)
+	{
+		Map<String, String> fieldInfo = new HashMap<String, String>();
+		fieldInfo.put("name", field.getName());
+		fieldInfo.put("type", field.getType().getSimpleName());
+		return fieldInfo;
 	}
 }
