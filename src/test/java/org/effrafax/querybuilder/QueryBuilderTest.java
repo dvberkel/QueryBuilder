@@ -54,6 +54,10 @@ public class QueryBuilderTest
 			"select * from Example where id = 0 and name = 'test';", new SqlStrategy())));
 		testBuilders.add(arrayWith(new NameAndIdTestForExampleQueryBuilder(
 			"building query for Example: id = 0, name = 'test'", new LogStrategy())));
+		testBuilders.add(arrayWith(new CharacterTestForSubExampleQueryBuilder(
+			"select * from SubExample where character = 'a';", new SqlStrategy())));
+		testBuilders.add(arrayWith(new CharacterTestForSubExampleQueryBuilder(
+			"building query for SubExample: character = 'a'", new LogStrategy())));
 
 		return testBuilders;
 
@@ -183,6 +187,25 @@ class NameTestForSubExampleQueryBuilder extends TestBuilderForSubExampleQueryBui
 		SubExampleQueryBuilder builder = builder();
 
 		builder.name().matches("test");
+
+		return builder;
+	}
+}
+
+class CharacterTestForSubExampleQueryBuilder extends TestBuilderForSubExampleQueryBuilder
+{
+
+	public CharacterTestForSubExampleQueryBuilder(String expectedResult, Strategy strategy)
+	{
+		super(expectedResult, strategy);
+	}
+
+	@Override
+	public SubExampleQueryBuilder givenWhen()
+	{
+		SubExampleQueryBuilder builder = builder();
+
+		builder.character().matches('a');
 
 		return builder;
 	}
