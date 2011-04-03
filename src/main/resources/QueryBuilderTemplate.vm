@@ -1,9 +1,9 @@
 package org.effrafax.querybuilder.generated.builder;
 
 import org.effrafax.querybuilder.core.QueryBuilder;
-import org.effrafax.querybuilder.core.criteria.LongPropertyCriterium;
-import org.effrafax.querybuilder.core.criteria.PropertyCriterium;
-import org.effrafax.querybuilder.core.criteria.StringPropertyCriterium;
+#foreach($criteriumPackageName in $criteriumPackageNames)
+import org.effrafax.querybuilder.core.criteria.${criteriumPackageName};
+#end
 import org.effrafax.querybuilder.test.${className};
 
 public class ${className}QueryBuilder extends QueryBuilder<${className}>

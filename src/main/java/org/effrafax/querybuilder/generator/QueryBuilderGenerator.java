@@ -3,9 +3,11 @@ package org.effrafax.querybuilder.generator;
 import java.io.Writer;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.PriorityQueue;
 
 import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
@@ -31,9 +33,26 @@ public class QueryBuilderGenerator
 	{
 		Template template = Velocity.getTemplate("src/main/resources/QueryBuilderTemplate.vm");
 		Context context = new VelocityContext();
+		context.put("criteriumPackageNames", createCriteriumPackageNames());
 		context.put("className", createClassName());
 		context.put("fieldInfos", createFieldInfos());
 		template.merge(context, writer);
+	}
+
+	private Collection<String> createCriteriumPackageNames()
+	{
+		Collection<String> criteriumPackageNames = new PriorityQueue<String>();
+		criteriumPackageNames.add(createPackageNameFor(null));
+		for (Field field : generateeClass.getFields())
+		{
+			criteriumPackageNames.add(createPackageNameFor(field.getType()));
+		}
+		return criteriumPackageNames;
+	}
+
+	private String createPackageNameFor(Class<?> type)
+	{
+		return String.format("%sPropertyCriterium", type != null ? type.getSimpleName() : "");
 	}
 
 	private String createClassName()

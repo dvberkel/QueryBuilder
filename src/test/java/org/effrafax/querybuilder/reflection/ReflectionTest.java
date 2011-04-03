@@ -28,7 +28,7 @@ public class ReflectionTest
 
 		Field[] fields = aClass.getFields();
 
-		assertTrue(2 == fields.length);
+		assertTrue(3 == fields.length);
 	}
 
 	@Test

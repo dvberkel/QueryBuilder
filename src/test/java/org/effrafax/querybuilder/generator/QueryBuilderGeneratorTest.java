@@ -10,12 +10,14 @@ import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.Velocity;
 import org.effrafax.querybuilder.test.Example;
 import org.effrafax.querybuilder.test.SubExample;
+import org.junit.Ignore;
 import org.junit.Test;
 
 public class QueryBuilderGeneratorTest
 {
 	private static final String REFERENCE_TEMPLATE = "src/test/resources/templates/reference/reference%sQueryBuilder.vm";
 
+	@Ignore
 	@Test
 	public void canGenerateAnExampleQueryBuilder()
 	{
@@ -27,6 +29,7 @@ public class QueryBuilderGeneratorTest
 		assertEquals(referenceQueryBuilderCodeFor(Example.class), writer.toString());
 	}
 
+	@Ignore
 	@Test
 	public void canGenerateASubExampleQueryBuilder()
 	{
