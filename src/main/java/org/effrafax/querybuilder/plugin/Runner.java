@@ -19,12 +19,11 @@ public class Runner
 		{
 			QueryBuilderGenerator generator = QueryBuilderGenerator.generatorFor(aClass);
 			File file = new File(String.format("%s%sQueryBuilder.java", DIRECTORY, aClass.getSimpleName()));
-			if (file.createNewFile())
-			{
-				Writer writer = new FileWriter(file);
-				generator.generate(writer);
-				writer.close();
-			}
+			file.createNewFile();
+
+			Writer writer = new FileWriter(file);
+			generator.generate(writer);
+			writer.close();
 		}
 
 	}
