@@ -18,10 +18,13 @@ public class Runner
 		for (Class<?> aClass : new Class<?>[] { Example.class, SubExample.class })
 		{
 			QueryBuilderGenerator generator = QueryBuilderGenerator.generatorFor(aClass);
-			Writer writer = new FileWriter(new File(String.format("%s%sQueryBuilder.java", DIRECTORY,
-				aClass.getSimpleName())));
-			generator.generate(writer);
-			writer.close();
+			File file = new File(String.format("%s%sQueryBuilder.java", DIRECTORY, aClass.getSimpleName()));
+			if (file.createNewFile())
+			{
+				Writer writer = new FileWriter(file);
+				generator.generate(writer);
+				writer.close();
+			}
 		}
 
 	}
