@@ -1,3 +1,4 @@
 .classpath
 .project
 target/
+src/main/java/org/effrafax/querybuilder/generated/builder/
