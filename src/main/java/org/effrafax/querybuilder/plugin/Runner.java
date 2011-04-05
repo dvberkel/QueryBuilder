@@ -11,7 +11,7 @@ import org.effrafax.querybuilder.test.SubExample;
 
 public class Runner
 {
-	private static final String SRC_FOLDER = "src/main/java/";
+	private static final String SRC_FOLDER = "src/generated/java/";
 
 	private static final String DIRECTORY = "org/effrafax/querybuilder/generated/builder/";
 
