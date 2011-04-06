@@ -1,4 +1,4 @@
-package org.effrafax.querybuilder.reflection;
+package org.effrafax.reflection;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
