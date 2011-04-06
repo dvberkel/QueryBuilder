@@ -21,8 +21,7 @@ public class Runner
 		for (Class<?> aClass : new Class<?>[] { Example.class, SubExample.class })
 		{
 			QueryBuilderGenerator generator = QueryBuilderGenerator.generatorFor(aClass);
-			File file = new File(
-				String.format("%s%s%sQueryBuilder.java", SRC_FOLDER, DIRECTORY, aClass.getSimpleName()));
+			File file = generator.fileIn(SRC_FOLDER);
 			file.getParentFile().mkdirs();
 			file.createNewFile();
 

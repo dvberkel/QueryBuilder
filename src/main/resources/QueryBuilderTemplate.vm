@@ -1,4 +1,4 @@
-package org.effrafax.querybuilder.generated.builder;
+package $packageName;
 
 import org.effrafax.querybuilder.core.QueryBuilder;
 #foreach($criteriumPackageName in $criteriumPackageNames)

@@ -1,7 +1,7 @@
 package org.effrafax.querybuilder.generated;
 
-import org.effrafax.querybuilder.generated.builder.ExampleQueryBuilder;
-import org.effrafax.querybuilder.generated.builder.SubExampleQueryBuilder;
+import org.effrafax.querybuilder.test.ExampleQueryBuilder;
+import org.effrafax.querybuilder.test.SubExampleQueryBuilder;
 
 public class QueryBuilderFactory
 {

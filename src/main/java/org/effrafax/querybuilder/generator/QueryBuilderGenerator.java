@@ -1,5 +1,6 @@
 package org.effrafax.querybuilder.generator;
 
+import java.io.File;
 import java.io.Writer;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -33,10 +34,16 @@ public class QueryBuilderGenerator
 	{
 		Template template = Velocity.getTemplate("src/main/resources/QueryBuilderTemplate.vm");
 		Context context = new VelocityContext();
+		context.put("packageName", createPackageName());
 		context.put("criteriumPackageNames", createCriteriumPackageNames());
 		context.put("className", createClassName());
 		context.put("fieldInfos", createFieldInfos());
 		template.merge(context, writer);
+	}
+
+	private String createPackageName()
+	{
+		return generateeClass.getPackage().getName();
 	}
 
 	private Collection<String> createCriteriumPackageNames()
@@ -76,5 +83,13 @@ public class QueryBuilderGenerator
 		fieldInfo.put("name", field.getName());
 		fieldInfo.put("type", field.getType().getSimpleName());
 		return fieldInfo;
+	}
+
+	public File fileIn(String sourceFolder)
+	{
+		String packageName = generateeClass.getPackage().getName().replaceAll("\\.", "/");
+		String fileName = String.format("%s%s/%sQueryBuilder.java", sourceFolder, packageName,
+			generateeClass.getSimpleName());
+		return new File(fileName);
 	}
 }
