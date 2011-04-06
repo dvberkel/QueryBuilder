@@ -17,13 +17,13 @@ public class Runner
 
 	public static void main(String[] args) throws IOException
 	{
-		new File(SRC_FOLDER + DIRECTORY).mkdirs();
 
 		for (Class<?> aClass : new Class<?>[] { Example.class, SubExample.class })
 		{
 			QueryBuilderGenerator generator = QueryBuilderGenerator.generatorFor(aClass);
 			File file = new File(
 				String.format("%s%s%sQueryBuilder.java", SRC_FOLDER, DIRECTORY, aClass.getSimpleName()));
+			file.getParentFile().mkdirs();
 			file.createNewFile();
 
 			Writer writer = new FileWriter(file);
