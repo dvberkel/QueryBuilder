@@ -50,4 +50,12 @@ public class ReflectionTest
 
 		assertEquals(String.class, field.getType());
 	}
+
+	@Test
+	public void aClassHasAPackage()
+	{
+		Class<?> aClass = Example.class;
+
+		assertEquals("org.effrafax.querybuilder.test", aClass.getPackage().getName());
+	}
 }
