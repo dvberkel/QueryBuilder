@@ -1,4 +1,4 @@
-package org.effrafax.querybuilder.string;
+package org.effrafax.string;
 
 import static org.junit.Assert.assertEquals;
 
