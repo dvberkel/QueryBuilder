@@ -31,6 +31,7 @@ public class LogStrategy implements Strategy
 		return StringUtils.join(representations, ", ");
 	}
 
+	@Override
 	public <T> String representationOf(PropertyCriterium<T, ?> propertyCriterium)
 	{
 		StringBuilder builder = new StringBuilder();
