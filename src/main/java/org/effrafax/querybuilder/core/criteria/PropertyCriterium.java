@@ -35,4 +35,14 @@ public class PropertyCriterium<T, U> implements Comparable<PropertyCriterium<T, 
 	{
 		return propertyName.compareTo(o.propertyName);
 	}
+
+	public String getPropertyName()
+	{
+		return propertyName;
+	}
+
+	public U getMatchValue()
+	{
+		return matchValue;
+	}
 }

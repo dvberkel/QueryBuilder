@@ -40,12 +40,12 @@ public class QueryBuilderTest
 		List<TestBuilder<?>[]> testBuilders = new ArrayList<TestBuilder<?>[]>();
 		testBuilders.add(arrayWith(new NameTestForExampleQueryBuilder("select * from Example where name = 'test';",
 			new SqlStrategy())));
-		testBuilders.add(arrayWith(new NameTestForExampleQueryBuilder("building query for Example: name = 'test'",
+		testBuilders.add(arrayWith(new NameTestForExampleQueryBuilder("building query for Example: name = test",
 			new LogStrategy())));
 		testBuilders.add(arrayWith(new NameTestForSubExampleQueryBuilder(
 			"select * from SubExample where name = 'test';", new SqlStrategy())));
-		testBuilders.add(arrayWith(new NameTestForSubExampleQueryBuilder(
-			"building query for SubExample: name = 'test'", new LogStrategy())));
+		testBuilders.add(arrayWith(new NameTestForSubExampleQueryBuilder("building query for SubExample: name = test",
+			new LogStrategy())));
 		testBuilders.add(arrayWith(new IdTestForExampleQueryBuilder("select * from Example where id = 0;",
 			new SqlStrategy())));
 		testBuilders.add(arrayWith(new IdTestForExampleQueryBuilder("building query for Example: id = 0",
@@ -53,11 +53,11 @@ public class QueryBuilderTest
 		testBuilders.add(arrayWith(new NameAndIdTestForExampleQueryBuilder(
 			"select * from Example where id = 0 and name = 'test';", new SqlStrategy())));
 		testBuilders.add(arrayWith(new NameAndIdTestForExampleQueryBuilder(
-			"building query for Example: id = 0, name = 'test'", new LogStrategy())));
+			"building query for Example: id = 0, name = test", new LogStrategy())));
 		testBuilders.add(arrayWith(new CharacterTestForSubExampleQueryBuilder(
 			"select * from SubExample where character = 'a';", new SqlStrategy())));
 		testBuilders.add(arrayWith(new CharacterTestForSubExampleQueryBuilder(
-			"building query for SubExample: character = 'a'", new LogStrategy())));
+			"building query for SubExample: character = a", new LogStrategy())));
 
 		return testBuilders;
 
