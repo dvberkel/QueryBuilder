@@ -7,10 +7,4 @@ public class StringPropertyCriterium<T> extends PropertyCriterium<T, String>
 	{
 		super(propertyName);
 	}
-
-	@Override
-	protected String representationOfMatchValue()
-	{
-		return String.format("'%s'", super.representationOfMatchValue());
-	}
 }
