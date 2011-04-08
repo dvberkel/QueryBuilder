@@ -23,7 +23,6 @@ public class LogStrategy implements Strategy
 
 	private <T> String parameters(QueryBuilder<T> queryBuilder)
 	{
-		Collection<PropertyCriterium<T, ?>> propertyCriteria = queryBuilder.getPropertyCriteria();
 		Collection<String> representations = new ArrayList<String>();
 		for (PropertyCriterium<T, ?> propertyCriterium : queryBuilder.getPropertyCriteria())
 		{
