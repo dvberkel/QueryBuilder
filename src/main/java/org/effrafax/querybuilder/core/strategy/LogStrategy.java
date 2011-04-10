@@ -30,31 +30,6 @@ public class LogStrategy implements Strategy
 			new LogPropertyCriteriumRepresentation<T>());
 		return StringUtils.join(representations, ", ");
 	}
-
-	@Override
-	public <T> String representationOf(PropertyCriterium<T, ?> propertyCriterium)
-	{
-		StringBuilder builder = new StringBuilder();
-		builder.append(representationOfPropertyName(propertyCriterium));
-		builder.append(representationOfConnector());
-		builder.append(representationOfMatchValue(propertyCriterium));
-		return builder.toString();
-	}
-
-	private <T> String representationOfPropertyName(PropertyCriterium<T, ?> propertyCriterium)
-	{
-		return propertyCriterium.getPropertyName();
-	}
-
-	private String representationOfConnector()
-	{
-		return " = ";
-	}
-
-	private <T> String representationOfMatchValue(PropertyCriterium<T, ?> propertyCriterium)
-	{
-		return propertyCriterium.getMatchValue().toString();
-	}
 }
 
 class LogPropertyCriteriumRepresentation<T> implements Function<PropertyCriterium<T, ?>, String>
