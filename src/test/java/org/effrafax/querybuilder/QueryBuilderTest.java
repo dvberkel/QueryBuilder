@@ -10,7 +10,6 @@ import org.effrafax.querybuilder.core.QueryBuilder;
 import org.effrafax.querybuilder.core.strategy.LogStrategy;
 import org.effrafax.querybuilder.core.strategy.SqlStrategy;
 import org.effrafax.querybuilder.core.strategy.Strategy;
-import org.effrafax.querybuilder.generated.QueryBuilderFactory;
 import org.effrafax.querybuilder.test.ExampleQueryBuilder;
 import org.effrafax.querybuilder.test.SubExampleQueryBuilder;
 import org.junit.Test;
