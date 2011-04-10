@@ -1,5 +1,7 @@
 package org.effrafax.querybuilder.core.strategy;
 
+import static com.google.common.collect.Collections2.transform;
+
 import java.util.Collection;
 
 import org.apache.commons.lang.StringUtils;
@@ -7,7 +9,6 @@ import org.effrafax.querybuilder.core.QueryBuilder;
 import org.effrafax.querybuilder.core.criteria.PropertyCriterium;
 
 import com.google.common.base.Function;
-import com.google.common.collect.Collections2;
 
 public class LogStrategy implements Strategy
 {
@@ -25,7 +26,7 @@ public class LogStrategy implements Strategy
 
 	private <T> String parameters(QueryBuilder<T> queryBuilder)
 	{
-		Collection<String> representations = Collections2.transform(queryBuilder.getPropertyCriteria(),
+		Collection<String> representations = transform(queryBuilder.getPropertyCriteria(),
 			new LogPropertyCriteriumRepresentation<T>());
 		return StringUtils.join(representations, ", ");
 	}
