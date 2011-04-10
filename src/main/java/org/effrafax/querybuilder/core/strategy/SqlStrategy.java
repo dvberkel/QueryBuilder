@@ -1,11 +1,14 @@
 package org.effrafax.querybuilder.core.strategy;
 
-import java.util.ArrayList;
+import static com.google.common.collect.Collections2.transform;
+
 import java.util.Collection;
 
 import org.apache.commons.lang.StringUtils;
 import org.effrafax.querybuilder.core.QueryBuilder;
 import org.effrafax.querybuilder.core.criteria.PropertyCriterium;
+
+import com.google.common.base.Function;
 
 public class SqlStrategy implements Strategy
 {
@@ -23,11 +26,8 @@ public class SqlStrategy implements Strategy
 
 	private <T> String whereClause(QueryBuilder<T> queryBuilder)
 	{
-		Collection<String> representations = new ArrayList<String>();
-		for (PropertyCriterium<T, ?> propertyCriterium : queryBuilder.getPropertyCriteria())
-		{
-			representations.add(representationOf(propertyCriterium));
-		}
+		Collection<String> representations = transform(queryBuilder.getPropertyCriteria(),
+			new SqlPropertyCriteriumRepresentation<T>());
 		return StringUtils.join(representations, " and ");
 	}
 
@@ -59,4 +59,43 @@ public class SqlStrategy implements Strategy
 		}
 		return propertyCriterium.getMatchValue().toString();
 	}
+}
+
+class SqlPropertyCriteriumRepresentation<T> implements Function<PropertyCriterium<T, ?>, String>
+{
+
+	@Override
+	public String apply(PropertyCriterium<T, ?> propertyCriterium)
+	{
+		return representationOf(propertyCriterium);
+	}
+
+	public String representationOf(PropertyCriterium<T, ?> propertyCriterium)
+	{
+		StringBuilder builder = new StringBuilder();
+		builder.append(representationOfPropertyName(propertyCriterium));
+		builder.append(representationOfConnector());
+		builder.append(representationOfMatchValue(propertyCriterium));
+		return builder.toString();
+	}
+
+	private String representationOfPropertyName(PropertyCriterium<T, ?> propertyCriterium)
+	{
+		return propertyCriterium.getPropertyName();
+	}
+
+	private String representationOfConnector()
+	{
+		return " = ";
+	}
+
+	private String representationOfMatchValue(PropertyCriterium<T, ?> propertyCriterium)
+	{
+		if (!(propertyCriterium.getMatchValue() instanceof Long))
+		{
+			return String.format("'%s'", propertyCriterium.getMatchValue());
+		}
+		return propertyCriterium.getMatchValue().toString();
+	}
+
 }
