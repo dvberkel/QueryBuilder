@@ -1,0 +1,17 @@
+package $packageName;
+
+#foreach($nameInfo in $nameInfos)
+import org.effrafax.querybuilder.test.${nameInfo.className}QueryBuilder;
+#end
+
+public class QueryBuilderFactory
+{
+
+#foreach($nameInfo in $nameInfos)
+	public static ${nameInfo.className}QueryBuilder ${nameInfo.methodName}QueryBuilder()
+	{
+		return new ${nameInfo.className}QueryBuilder();
+	}
+
+#end
+}
