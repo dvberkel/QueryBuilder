@@ -13,8 +13,6 @@ public class Runner
 {
 	private static final String SRC_FOLDER = "src/generated/java/";
 
-	private static final String DIRECTORY = "org/effrafax/querybuilder/generated/builder/";
-
 	public static void main(String[] args) throws IOException
 	{
 
