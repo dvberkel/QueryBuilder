@@ -4,9 +4,10 @@ import static com.google.common.collect.Collections2.transform;
 
 import java.util.Collection;
 
-import org.apache.commons.lang.StringUtils;
 import org.effrafax.querybuilder.core.QueryBuilder;
 import org.effrafax.querybuilder.core.strategy.propertycriterium.SqlPropertyCriteriumRepresentation;
+
+import com.google.common.base.Joiner;
 
 public class SqlStrategy implements Strategy
 {
@@ -26,6 +27,6 @@ public class SqlStrategy implements Strategy
 	{
 		Collection<String> representations = transform(queryBuilder.getPropertyCriteria(),
 			new SqlPropertyCriteriumRepresentation<T>());
-		return StringUtils.join(representations, " and ");
+		return Joiner.on(" and ").join(representations);
 	}
 }
