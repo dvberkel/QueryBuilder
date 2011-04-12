@@ -4,7 +4,7 @@ import org.effrafax.querybuilder.core.QueryBuilder;
 #foreach($criteriumPackageName in $criteriumPackageNames)
 import org.effrafax.querybuilder.core.criteria.${criteriumPackageName};
 #end
-import org.effrafax.querybuilder.test.${className};
+import ${packageName}.${className};
 
 public class ${className}QueryBuilder extends QueryBuilder<${className}>
 {
