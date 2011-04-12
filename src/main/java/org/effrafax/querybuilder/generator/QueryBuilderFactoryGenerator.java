@@ -68,6 +68,7 @@ public class QueryBuilderFactoryGenerator
 	{
 		Map<String, String> classNameInfo = new HashMap<String, String>();
 		classNameInfo.put("className", classNameFor(aClass));
+		classNameInfo.put("packageName", packageNameFor(aClass));
 		classNameInfo.put("methodName", methodNameFor(aClass));
 		return classNameInfo;
 	}
@@ -75,6 +76,11 @@ public class QueryBuilderFactoryGenerator
 	private String classNameFor(Class<?> aClass)
 	{
 		return aClass.getSimpleName();
+	}
+
+	private String packageNameFor(Class<?> aClass)
+	{
+		return aClass.getPackage().getName();
 	}
 
 	private String methodNameFor(Class<?> aClass)
