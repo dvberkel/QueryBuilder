@@ -5,16 +5,19 @@ import org.effrafax.querybuilder.core.criteria.PropertyCriterium;
 public class LogPropertyCriteriumRepresentation<T> extends PropertyCriteriumRepresentation<T>
 {
 
+	@Override
 	protected String representationOfPropertyName(PropertyCriterium<T, ?> propertyCriterium)
 	{
 		return propertyCriterium.getPropertyName();
 	}
 
-	protected String representationOfConnector()
+	@Override
+	protected String representationOfConnector(PropertyCriterium<T, ?> propertyCriterium)
 	{
-		return " = ";
+		return propertyCriterium.getConnector();
 	}
 
+	@Override
 	protected String representationOfMatchValue(PropertyCriterium<T, ?> propertyCriterium)
 	{
 		return propertyCriterium.getMatchValue().toString();

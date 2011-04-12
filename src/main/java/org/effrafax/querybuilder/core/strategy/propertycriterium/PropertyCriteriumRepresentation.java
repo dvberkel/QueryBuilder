@@ -16,14 +16,14 @@ public abstract class PropertyCriteriumRepresentation<T> implements Function<Pro
 	{
 		StringBuilder builder = new StringBuilder();
 		builder.append(representationOfPropertyName(propertyCriterium));
-		builder.append(representationOfConnector());
+		builder.append(representationOfConnector(propertyCriterium));
 		builder.append(representationOfMatchValue(propertyCriterium));
 		return builder.toString();
 	}
 
 	protected abstract String representationOfPropertyName(PropertyCriterium<T, ?> propertyCriterium);
 
-	protected abstract String representationOfConnector();
+	protected abstract String representationOfConnector(PropertyCriterium<T, ?> propertyCriterium);
 
 	protected abstract String representationOfMatchValue(PropertyCriterium<T, ?> propertyCriterium);
 }

@@ -12,7 +12,7 @@ public class SqlPropertyCriteriumRepresentation<T> extends PropertyCriteriumRepr
 	}
 
 	@Override
-	protected String representationOfConnector()
+	protected String representationOfConnector(PropertyCriterium<T, ?> propertyCriterium)
 	{
 		return " = ";
 	}

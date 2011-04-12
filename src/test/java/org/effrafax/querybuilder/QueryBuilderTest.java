@@ -57,6 +57,8 @@ public class QueryBuilderTest
 			"select * from SubExample where character = 'a';", new SqlStrategy())));
 		testBuilders.add(arrayWith(new CharacterTestForSubExampleQueryBuilder(
 			"building query for SubExample: character = a", new LogStrategy())));
+		testBuilders.add(arrayWith(new IdLessThenValueTestForExampleQueryBuilder("building query for Example: id < 0",
+			new LogStrategy())));
 
 		return testBuilders;
 
@@ -208,4 +210,22 @@ class CharacterTestForSubExampleQueryBuilder extends TestBuilderForSubExampleQue
 
 		return builder;
 	}
+}
+
+class IdLessThenValueTestForExampleQueryBuilder extends TestBuilderForExampleQueryBuilder
+{
+
+	public IdLessThenValueTestForExampleQueryBuilder(String expectedResult, Strategy strategy)
+	{
+		super(expectedResult, strategy);
+	}
+
+	@Override
+	public ExampleQueryBuilder givenWhen()
+	{
+		ExampleQueryBuilder builder = builder();
+		builder.id().lessThen(0L);
+		return builder;
+	}
+
 }

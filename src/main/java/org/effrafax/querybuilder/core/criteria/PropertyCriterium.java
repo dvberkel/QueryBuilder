@@ -7,6 +7,8 @@ public class PropertyCriterium<T, U> implements Comparable<PropertyCriterium<T, 
 
 	private U matchValue;
 
+	private String connector = " = ";
+
 	public PropertyCriterium(String propertyName)
 	{
 		this.propertyName = propertyName;
@@ -31,5 +33,16 @@ public class PropertyCriterium<T, U> implements Comparable<PropertyCriterium<T, 
 	public U getMatchValue()
 	{
 		return matchValue;
+	}
+
+	public String getConnector()
+	{
+		return connector;
+	}
+
+	public void lessThen(U value)
+	{
+		this.connector = " < ";
+		this.matchValue = value;
 	}
 }
