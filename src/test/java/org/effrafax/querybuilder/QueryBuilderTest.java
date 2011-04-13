@@ -57,6 +57,8 @@ public class QueryBuilderTest
 			"select * from SubExample where character = 'a';", new SqlStrategy())));
 		testBuilders.add(arrayWith(new CharacterTestForSubExampleQueryBuilder(
 			"building query for SubExample: character = a", new LogStrategy())));
+		testBuilders.add(arrayWith(new IdLessThenValueTestForExampleQueryBuilder("select * from Example where id < 0;",
+			new SqlStrategy())));
 		testBuilders.add(arrayWith(new IdLessThenValueTestForExampleQueryBuilder("building query for Example: id < 0",
 			new LogStrategy())));
 
