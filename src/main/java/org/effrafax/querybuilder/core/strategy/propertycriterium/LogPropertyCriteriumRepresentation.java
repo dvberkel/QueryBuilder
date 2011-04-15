@@ -14,7 +14,7 @@ public class LogPropertyCriteriumRepresentation<T> extends PropertyCriteriumRepr
 	@Override
 	protected String representationOfConnector(PropertyCriterium<T, ?> propertyCriterium)
 	{
-		return propertyCriterium.getConnector();
+		return propertyCriterium.getConnector().toString();
 	}
 
 	@Override

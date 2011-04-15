@@ -1,5 +1,9 @@
 package org.effrafax.querybuilder.core.criteria;
 
+import org.effrafax.querybuilder.core.criteria.connector.Connector;
+import org.effrafax.querybuilder.core.criteria.connector.EqualsConnector;
+import org.effrafax.querybuilder.core.criteria.connector.LessThenConnector;
+
 public class PropertyCriterium<T, U> implements Comparable<PropertyCriterium<T, ?>>
 {
 
@@ -7,7 +11,7 @@ public class PropertyCriterium<T, U> implements Comparable<PropertyCriterium<T, 
 
 	private U matchValue;
 
-	private String connector = " = ";
+	private Connector connector = new EqualsConnector();
 
 	public PropertyCriterium(String propertyName)
 	{
@@ -35,14 +39,14 @@ public class PropertyCriterium<T, U> implements Comparable<PropertyCriterium<T, 
 		return matchValue;
 	}
 
-	public String getConnector()
+	public Connector getConnector()
 	{
 		return connector;
 	}
 
 	public void lessThen(U value)
 	{
-		this.connector = " < ";
+		this.connector = new LessThenConnector();
 		this.matchValue = value;
 	}
 }
