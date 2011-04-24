@@ -5,8 +5,8 @@ import static org.junit.Assert.assertTrue;
 
 import java.lang.reflect.Field;
 
-import org.effrafax.querybuilder.test.Example;
-import org.effrafax.querybuilder.test.SubExample;
+import org.effrafax.querybuilder.core.criteria.PropertyCriterium;
+import org.effrafax.querybuilder.core.criteria.StringPropertyCriterium;
 import org.junit.Test;
 
 public class ReflectionTest
@@ -14,48 +14,36 @@ public class ReflectionTest
 	@Test
 	public void shouldReturnFields()
 	{
-		Class<?> aClass = Example.class;
+		Class<?> aClass = PropertyCriterium.class;
 
 		Field[] fields = aClass.getFields();
 
-		assertTrue(2 == fields.length);
+		assertTrue(0 == fields.length);
 	}
 
 	@Test
 	public void shouldReturnFieldsOfParent()
 	{
-		Class<?> aClass = SubExample.class;
+		Class<?> aClass = StringPropertyCriterium.class;
 
 		Field[] fields = aClass.getFields();
 
-		assertTrue(3 == fields.length);
+		assertTrue(0 == fields.length);
 	}
 
-	@Test
+	@Test(expected = NoSuchFieldException.class)
 	public void aFieldHasAName() throws SecurityException, NoSuchFieldException
 	{
-		Class<?> aClass = Example.class;
+		Class<?> aClass = PropertyCriterium.class;
 
-		Field field = aClass.getField("name");
-
-		assertEquals("name", field.getName());
-	}
-
-	@Test
-	public void aFieldHasAType() throws SecurityException, NoSuchFieldException
-	{
-		Class<?> aClass = Example.class;
-
-		Field field = aClass.getField("name");
-
-		assertEquals(String.class, field.getType());
+		Field field = aClass.getField("propertyName");
 	}
 
 	@Test
 	public void aClassHasAPackage()
 	{
-		Class<?> aClass = Example.class;
+		Class<?> aClass = PropertyCriterium.class;
 
-		assertEquals("org.effrafax.querybuilder.test", aClass.getPackage().getName());
+		assertEquals("org.effrafax.querybuilder.core.criteria", aClass.getPackage().getName());
 	}
 }
