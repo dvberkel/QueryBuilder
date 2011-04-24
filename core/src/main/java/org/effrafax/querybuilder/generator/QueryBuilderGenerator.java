@@ -1,6 +1,8 @@
 package org.effrafax.querybuilder.generator;
 
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.Writer;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -9,11 +11,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.PriorityQueue;
+import java.util.Properties;
 
+import org.apache.commons.io.IOUtils;
 import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.Velocity;
 import org.apache.velocity.context.Context;
+import org.apache.velocity.runtime.resource.loader.StringResourceLoader;
+import org.apache.velocity.runtime.resource.util.StringResourceRepository;
 
 public class QueryBuilderGenerator
 {
@@ -32,7 +38,7 @@ public class QueryBuilderGenerator
 
 	public void generate(Writer writer)
 	{
-		Template template = Velocity.getTemplate(getQueryBuilderTemplatePath());
+		Template template = getTemplate();
 		Context context = new VelocityContext();
 		context.put("packageName", createPackageName());
 		context.put("criteriumPackageNames", createCriteriumPackageNames());
@@ -41,9 +47,29 @@ public class QueryBuilderGenerator
 		template.merge(context, writer);
 	}
 
-	private String getQueryBuilderTemplatePath()
+	private Template getTemplate()
 	{
-		return getClass().getResource("QueryBuilderTemplate.vm").getPath();
+		Properties p = new Properties();
+		p.setProperty("resource.loader", "string");
+		p.setProperty("resource.loader.class", "org.apache.velocity.runtime.resource.loader.StringResourceLoader");
+		Velocity.init(p);
+
+		String templatePath = "QueryBuilderTemplate.vm";
+		if (!Velocity.resourceExists(templatePath))
+		{
+			StringResourceRepository repo = StringResourceLoader.getRepository();
+			InputStream stream = Thread.currentThread().getContextClassLoader().getResourceAsStream(templatePath);
+			try
+			{
+				repo.putStringResource(templatePath, IOUtils.toString(stream, "UTF-8"));
+			}
+			catch (IOException e)
+			{
+				throw new RuntimeException(e);
+			}
+		}
+
+		return Velocity.getTemplate(templatePath);
 	}
 
 	private String createPackageName()
