@@ -36,7 +36,7 @@ public class ReflectionTest
 	{
 		Class<?> aClass = PropertyCriterium.class;
 
-		Field field = aClass.getField("propertyName");
+		aClass.getField("propertyName");
 	}
 
 	@Test
