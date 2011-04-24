@@ -32,13 +32,18 @@ public class QueryBuilderGenerator
 
 	public void generate(Writer writer)
 	{
-		Template template = Velocity.getTemplate("src/main/resources/QueryBuilderTemplate.vm");
+		Template template = Velocity.getTemplate(getQueryBuilderTemplatePath());
 		Context context = new VelocityContext();
 		context.put("packageName", createPackageName());
 		context.put("criteriumPackageNames", createCriteriumPackageNames());
 		context.put("className", createClassName());
 		context.put("fieldInfos", createFieldInfos());
 		template.merge(context, writer);
+	}
+
+	private String getQueryBuilderTemplatePath()
+	{
+		return getClass().getResource("QueryBuilderTemplate.vm").getPath();
 	}
 
 	private String createPackageName()

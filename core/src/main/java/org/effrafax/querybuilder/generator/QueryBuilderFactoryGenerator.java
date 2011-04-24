@@ -47,11 +47,16 @@ public class QueryBuilderFactoryGenerator
 
 	public void generate(Writer writer)
 	{
-		Template template = Velocity.getTemplate("src/main/resources/QueryBuilderFactoryTemplate.vm");
+		Template template = Velocity.getTemplate(getQueryBuilderFactoryTemplatePath());
 		Context context = new VelocityContext();
 		context.put("packageName", packageName);
 		context.put("nameInfos", createNameInfo());
 		template.merge(context, writer);
+	}
+
+	private String getQueryBuilderFactoryTemplatePath()
+	{
+		return getClass().getResource("QueryBuilderFactoryTemplate.vm").getPath();
 	}
 
 	private Collection<Map<String, String>> createNameInfo()
