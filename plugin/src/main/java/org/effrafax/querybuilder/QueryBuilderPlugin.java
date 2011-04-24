@@ -9,8 +9,6 @@ import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.effrafax.querybuilder.generator.QueryBuilderFactoryGenerator;
 import org.effrafax.querybuilder.generator.QueryBuilderGenerator;
-import org.effrafax.querybuilder.test.Example;
-import org.effrafax.querybuilder.test.SubExample;
 
 /**
  * Goal which generates QueryBuilders and the QueryBuilderFactory.
@@ -29,7 +27,7 @@ public class QueryBuilderPlugin extends AbstractMojo
 	 */
 	private String generatedSourceDirectoryName;
 
-	private Class<?>[] classes = new Class<?>[] { Example.class, SubExample.class };
+	private Class<?>[] classes = new Class<?>[] { QueryBuilderPlugin.class };
 
 	private String factoryPackageName = "org.effrafax.querybuilder";
 
